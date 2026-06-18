@@ -1,30 +1,37 @@
+/* ── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 /* ── 리셋 & 변수 ─────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg0:       #0d1117;
-  --bg1:       #161b22;
-  --bg2:       #21262d;
-  --bg3:       #1c2128;
-  --border:    #30363d;
-  --text1:     #e6edf3;
-  --text2:     #8b949e;
-  --text3:     #656d76;
-  --accent:    #58a6ff;
-  --accent-hv: #79c0ff;
-  --danger:    #f85149;
-  --success:   #3fb950;
-  --radius:    8px;
-  --shadow:    0 8px 24px rgba(0,0,0,.45);
+  --bg0:       #FFE4F0;
+  --bg1:       #FFF0F8;
+  --bg2:       #FFDAEE;
+  --bg3:       #FFFFFF;
+  --border:    #F9BDD8;
+  --text1:     #4A0E26;
+  --text2:     #9B4C6E;
+  --text3:     #C48FA8;
+  --accent:    #D63384;
+  --accent-hv: #E91E8C;
+  --gold:      #C9963D;
+  --danger:    #FF4D6D;
+  --success:   #28A745;
+  --radius:    12px;
+  --shadow:    0 8px 28px rgba(214, 51, 132, 0.18);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
   background: var(--bg0);
   color: var(--text1);
   min-height: 100vh;
   line-height: 1.5;
   font-size: 14px;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,182,215,0.35) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,160,200,0.25) 0%, transparent 50%);
 }
 
 /* ── 인증 페이지 ─────────────────────────────────────────────────────────── */
@@ -39,10 +46,29 @@ body {
   width: 100%;
   max-width: 400px;
   background: var(--bg1);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
   padding: 36px 32px;
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: '✨';
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  opacity: .6;
+}
+.auth-container::after {
+  content: '💖';
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 20px;
+  opacity: .5;
 }
 
 .auth-logo {
@@ -50,10 +76,11 @@ body {
   margin-bottom: 28px;
 }
 .auth-logo h1 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 6px;
+  letter-spacing: 1px;
 }
 .auth-logo p { color: var(--text2); font-size: 13px; }
 
@@ -72,16 +99,17 @@ body {
   border: none;
   background: transparent;
   color: var(--text2);
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: 'Jua', sans-serif;
   transition: all .15s;
 }
 .tab-btn.active {
-  background: var(--bg1);
-  color: var(--text1);
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(214, 51, 132, .3);
 }
 
 /* 폼 */
@@ -96,60 +124,70 @@ body {
 .form-group input,
 .form-group textarea {
   padding: 9px 12px;
-  background: var(--bg0);
-  border: 1px solid var(--border);
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   color: var(--text1);
   font-size: 14px;
-  font-family: inherit;
+  font-family: 'Jua', sans-serif;
   outline: none;
-  transition: border-color .15s;
+  transition: border-color .15s, box-shadow .15s;
   resize: vertical;
 }
 .form-group input:focus,
-.form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(214, 51, 132, .12);
+}
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--text3); }
 
 /* ── 버튼 ────────────────────────────────────────────────────────────────── */
 .btn-primary {
-  padding: 9px 18px;
-  background: var(--accent);
-  color: #000;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--accent) 0%, #F06292 100%);
+  color: #fff;
   border: none;
   border-radius: var(--radius);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
-  transition: background .15s;
+  transition: opacity .15s, box-shadow .15s;
+  box-shadow: 0 3px 12px rgba(214, 51, 132, .3);
+  letter-spacing: .3px;
 }
-.btn-primary:hover { background: var(--accent-hv); }
+.btn-primary:hover {
+  opacity: .9;
+  box-shadow: 0 5px 16px rgba(214, 51, 132, .4);
+}
 .btn-primary.full  { width: 100%; }
 
 .btn-secondary {
-  padding: 9px 18px;
+  padding: 10px 18px;
   background: var(--bg2);
-  color: var(--text1);
-  border: 1px solid var(--border);
+  color: var(--text2);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   font-size: 14px;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
   transition: border-color .15s;
 }
-.btn-secondary:hover { border-color: var(--text2); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
 .btn-icon {
   background: none;
   border: none;
   cursor: pointer;
   padding: 3px 7px;
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--text2);
   font-size: 13px;
   line-height: 1;
   transition: background .15s, color .15s;
 }
-.btn-icon:hover           { background: var(--bg0); color: var(--text1); }
+.btn-icon:hover           { background: var(--bg2); color: var(--accent); }
 .btn-icon.danger:hover    { color: var(--danger); }
 
 /* 메시지 */
@@ -184,17 +222,18 @@ body {
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 9px 18px;
-  background: var(--bg2);
+  padding: 10px 18px;
+  background: var(--bg3);
   color: var(--text1);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
-  transition: border-color .15s, background .15s;
+  transition: border-color .15s, box-shadow .15s;
 }
-.btn-google:hover { border-color: var(--text2); background: var(--bg3); }
+.btn-google:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(214,51,132,.15); }
 
 /* ── 보드 페이지 레이아웃 ────────────────────────────────────────────────── */
 .board-page {
@@ -210,52 +249,61 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  height: 52px;
-  background: var(--bg1);
-  border-bottom: 1px solid var(--border);
+  height: 56px;
+  background: linear-gradient(135deg, #F06292 0%, var(--accent) 100%);
+  border-bottom: none;
   flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(214, 51, 132, .3);
 }
 .app-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  color: var(--accent);
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.15);
 }
 .header-right { display: flex; align-items: center; gap: 14px; }
 
 .user-badge {
   font-size: 13px;
-  color: var(--text2);
+  color: rgba(255,255,255,.85);
 }
 .btn-logout {
-  padding: 5px 12px;
-  background: transparent;
-  color: var(--text2);
-  border: 1px solid var(--border);
+  padding: 5px 14px;
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.5);
   border-radius: var(--radius);
   font-size: 13px;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
   transition: all .15s;
 }
-.btn-logout:hover { color: var(--danger); border-color: var(--danger); }
+.btn-logout:hover { background: rgba(255,255,255,.35); border-color: #fff; }
 
 /* 툴바 */
 .board-toolbar {
   padding: 10px 20px;
   background: var(--bg0);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
   flex-shrink: 0;
 }
 .btn-add-col {
-  padding: 7px 14px;
+  padding: 7px 16px;
   background: transparent;
-  color: var(--text2);
-  border: 1px dashed var(--border);
+  color: var(--accent);
+  border: 1.5px dashed var(--border);
   border-radius: var(--radius);
   font-size: 13px;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
   transition: all .15s;
 }
-.btn-add-col:hover { color: var(--accent); border-color: var(--accent); }
+.btn-add-col:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(214, 51, 132, .06);
+}
 
 /* 보드 스크롤 영역 */
 .board-wrap {
@@ -280,11 +328,12 @@ body {
   width: 272px;
   flex-shrink: 0;
   background: var(--bg1);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 130px);
+  box-shadow: 0 4px 16px rgba(214, 51, 132, .08);
 }
 
 .col-header {
@@ -294,24 +343,26 @@ body {
   padding: 12px 14px 8px;
   cursor: grab;
   user-select: none;
+  border-bottom: 1px solid var(--border);
 }
 .col-header:active { cursor: grabbing; }
 
 .col-title {
   flex: 1;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text1);
+  font-weight: 700;
+  color: var(--accent);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .col-count {
   font-size: 11px;
-  color: var(--text3);
-  background: var(--bg2);
+  color: var(--accent);
+  background: rgba(214, 51, 132, .12);
   border-radius: 10px;
-  padding: 1px 7px;
+  padding: 1px 8px;
+  font-weight: 600;
 }
 .col-actions {
   display: flex;
@@ -325,7 +376,7 @@ body {
 .card-list {
   flex: 1;
   overflow-y: auto;
-  padding: 4px 10px;
+  padding: 8px 10px;
   min-height: 6px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
@@ -337,20 +388,24 @@ body {
 /* ── 카드 ────────────────────────────────────────────────────────────────── */
 .card {
   background: var(--bg3);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   padding: 11px 12px;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   cursor: grab;
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .15s, box-shadow .15s, transform .1s;
 }
 .card:last-child  { margin-bottom: 0; }
-.card:hover       { border-color: var(--accent); box-shadow: 0 2px 8px rgba(88,166,255,.12); }
+.card:hover       {
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(214, 51, 132, .15);
+  transform: translateY(-1px);
+}
 .card:active      { cursor: grabbing; }
 
 .card-title {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text1);
   word-break: break-word;
   margin-bottom: 3px;
@@ -381,40 +436,41 @@ body {
 /* 카드 추가 버튼 */
 .btn-add-card {
   width: 100%;
-  padding: 9px 14px;
+  padding: 10px 14px;
   background: transparent;
   color: var(--text3);
   border: none;
-  border-top: 1px solid var(--border);
-  border-radius: 0 0 12px 12px;
+  border-top: 1.5px solid var(--border);
+  border-radius: 0 0 14px 14px;
   font-size: 13px;
+  font-family: 'Jua', sans-serif;
   cursor: pointer;
   text-align: left;
   transition: background .15s, color .15s;
 }
-.btn-add-card:hover { background: var(--bg2); color: var(--accent); }
+.btn-add-card:hover { background: rgba(214, 51, 132, .06); color: var(--accent); }
 
 /* ── 모달 ────────────────────────────────────────────────────────────────── */
 .modal-backdrop {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.65);
+  background: rgba(74, 14, 38, .4);
   z-index: 300;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
   padding: 20px;
 }
 .modal-backdrop.open { display: flex; }
 
 .modal {
   background: var(--bg1);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
   width: 100%;
   max-width: 460px;
-  padding: 24px;
+  padding: 28px;
   box-shadow: var(--shadow);
   animation: pop-in .18s ease;
 }
@@ -427,21 +483,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
-.modal-header h2 { font-size: 16px; font-weight: 600; }
+.modal-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent);
+}
 
 .modal-close {
-  background: none;
+  background: var(--bg2);
   border: none;
   color: var(--text2);
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
-  padding: 4px 7px;
-  border-radius: 4px;
-  transition: background .15s;
+  padding: 5px 9px;
+  border-radius: 8px;
+  transition: background .15s, color .15s;
 }
-.modal-close:hover { background: var(--bg2); color: var(--text1); }
+.modal-close:hover { background: rgba(214, 51, 132, .15); color: var(--accent); }
 
 .modal form { display: flex; flex-direction: column; gap: 14px; }
 

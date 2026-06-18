@@ -85,7 +85,7 @@ function buildColumn(col) {
     <div class="card-list" data-col-id="${col.id}">
       ${colCards.map(buildCardHtml).join('')}
     </div>
-    <button class="btn-add-card" onclick="openCardModal('${col.id}')">＋ 카드 추가</button>
+    <button class="btn-add-card" onclick="openCardModal('${col.id}')">💖 카드 추가</button>
   `;
   return el;
 }
@@ -157,7 +157,7 @@ function setupDnD() {
 
 function openColModal(colId) {
   const col = colId ? columns.find(c => c.id === colId) : null;
-  document.getElementById('col-modal-title').textContent = col ? '컬럼 수정' : '컬럼 추가';
+  document.getElementById('col-modal-title').textContent = col ? '✏️ 컬럼 수정' : '✨ 컬럼 추가';
   document.getElementById('col-modal-id').value    = col ? col.id : '';
   document.getElementById('col-title-input').value = col ? col.title : '';
   openModal('col-modal');
@@ -196,7 +196,7 @@ async function removeColumn(colId) {
 
 function openCardModal(columnId, cardId) {
   const card = cardId ? cards.find(c => c.id === cardId) : null;
-  document.getElementById('card-modal-title').textContent = card ? '카드 수정' : '카드 추가';
+  document.getElementById('card-modal-title').textContent = card ? '✏️ 카드 수정' : '💖 카드 추가';
   document.getElementById('card-modal-id').value          = card ? card.id : '';
   document.getElementById('card-modal-col-id').value      = columnId;
   document.getElementById('card-title-input').value       = card ? card.title : '';
