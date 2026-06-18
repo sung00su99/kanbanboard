@@ -78,14 +78,14 @@ function buildColumn(col) {
       <span class="col-title">${esc(col.title)}</span>
       <span class="col-count">${colCards.length}</span>
       <div class="col-actions">
-        <button class="btn-icon" title="수정"   onclick="openColModal(${col.id})">✎</button>
-        <button class="btn-icon danger" title="삭제" onclick="removeColumn(${col.id})">✕</button>
+        <button class="btn-icon" title="수정"   onclick="openColModal('${col.id}')">✎</button>
+        <button class="btn-icon danger" title="삭제" onclick="removeColumn('${col.id}')">✕</button>
       </div>
     </div>
     <div class="card-list" data-col-id="${col.id}">
       ${colCards.map(buildCardHtml).join('')}
     </div>
-    <button class="btn-add-card" onclick="openCardModal(${col.id})">＋ 카드 추가</button>
+    <button class="btn-add-card" onclick="openCardModal('${col.id}')">＋ 카드 추가</button>
   `;
   return el;
 }
@@ -96,8 +96,8 @@ function buildCardHtml(card) {
       <div class="card-title">${esc(card.title)}</div>
       ${card.description ? `<div class="card-desc">${esc(card.description)}</div>` : ''}
       <div class="card-actions">
-        <button class="btn-icon" title="수정"   onclick="openCardModal(${card.column_id}, ${card.id})">✎</button>
-        <button class="btn-icon danger" title="삭제" onclick="removeCard(${card.id})">✕</button>
+        <button class="btn-icon" title="수정"   onclick="openCardModal('${card.column_id}', '${card.id}')">✎</button>
+        <button class="btn-icon danger" title="삭제" onclick="removeCard('${card.id}')">✕</button>
       </div>
     </div>`;
 }
@@ -114,7 +114,7 @@ function setupDnD() {
     draggable: '.column',
     onEnd: async () => {
       const order = [...board.querySelectorAll('.column')].map((el, i) => ({
-        id: +el.dataset.id, position: i,
+        id: el.dataset.id, position: i,
       }));
       order.forEach(({ id, position }) => {
         const col = columns.find(c => c.id === id);
@@ -133,10 +133,10 @@ function setupDnD() {
       onEnd: async () => {
         const reorder = [];
         document.querySelectorAll('.card-list').forEach(lst => {
-          const colId = +lst.dataset.colId;
+          const colId = lst.dataset.colId;
           lst.querySelectorAll('.card').forEach((cardEl, i) => {
-            reorder.push({ id: +cardEl.dataset.id, column_id: colId, position: i });
-            const card = cards.find(c => c.id === +cardEl.dataset.id);
+            reorder.push({ id: cardEl.dataset.id, column_id: colId, position: i });
+            const card = cards.find(c => c.id === cardEl.dataset.id);
             if (card) { card.column_id = colId; card.position = i; }
           });
         });
@@ -172,7 +172,7 @@ async function saveColumn() {
   try {
     if (colId) {
       const updated = await api.updateColumn(colId, { title });
-      const idx = columns.findIndex(c => c.id === +colId);
+      const idx = columns.findIndex(c => c.id === colId);
       if (idx !== -1) columns[idx] = updated;
     } else {
       columns.push(await api.createColumn({ title }));
@@ -209,13 +209,13 @@ async function saveCard() {
   const title    = document.getElementById('card-title-input').value.trim();
   const desc     = document.getElementById('card-desc-input').value.trim();
   const cardId   = document.getElementById('card-modal-id').value;
-  const columnId = +document.getElementById('card-modal-col-id').value;
+  const columnId = document.getElementById('card-modal-col-id').value;
   if (!title) return;
 
   try {
     if (cardId) {
       const updated = await api.updateCard(cardId, { title, description: desc });
-      const idx = cards.findIndex(c => c.id === +cardId);
+      const idx = cards.findIndex(c => c.id === cardId);
       if (idx !== -1) cards[idx] = updated;
     } else {
       cards.push(await api.createCard({ title, description: desc, column_id: columnId }));
