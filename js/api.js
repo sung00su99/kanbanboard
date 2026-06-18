@@ -26,6 +26,15 @@ const api = {
     if (error) throw new Error('아이디 또는 비밀번호가 올바르지 않습니다.');
   },
 
+  async loginWithGoogle() {
+    const redirectTo = new URL('board.html', location.href).href;
+    const { error } = await _db.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo },
+    });
+    if (error) throw new Error(error.message);
+  },
+
   async logout() {
     await _db.auth.signOut();
   },

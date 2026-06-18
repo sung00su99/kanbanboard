@@ -101,9 +101,17 @@ BEGIN
     INSERT INTO public.profiles (id, username, name)
     VALUES (
         NEW.id,
-        NEW.raw_user_meta_data ->> 'username',
-        NEW.raw_user_meta_data ->> 'name'
-    );
+        COALESCE(
+            NEW.raw_user_meta_data ->> 'username',
+            split_part(NEW.email, '@', 1)
+        ),
+        COALESCE(
+            NEW.raw_user_meta_data ->> 'name',
+            NEW.raw_user_meta_data ->> 'full_name',
+            split_part(NEW.email, '@', 1)
+        )
+    )
+    ON CONFLICT (id) DO NOTHING;
     RETURN NEW;
 END;
 $$;

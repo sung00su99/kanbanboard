@@ -160,6 +160,42 @@ body {
 }
 .form-message.ok { color: var(--success); }
 
+/* 구분선 */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text3);
+  font-size: 12px;
+  margin: 2px 0;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Google 로그인 버튼 */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 18px;
+  background: var(--bg2);
+  color: var(--text1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.btn-google:hover { border-color: var(--text2); background: var(--bg3); }
+
 /* ── 보드 페이지 레이아웃 ────────────────────────────────────────────────── */
 .board-page {
   display: flex;

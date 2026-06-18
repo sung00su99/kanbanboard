@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   loginTab.addEventListener('click',  () => showTab('login'));
   signupTab.addEventListener('click', () => showTab('signup'));
 
+  document.getElementById('google-btn').addEventListener('click', async () => {
+    try {
+      await api.loginWithGoogle();
+    } catch (err) {
+      loginMsg.textContent = err.message;
+    }
+  });
+
   // 로그인
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
