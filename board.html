@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>칸반보드</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="board-page">
+
+  <!-- 헤더 -->
+  <header class="app-header">
+    <span class="app-title">칸반보드</span>
+    <div class="header-right">
+      <span class="user-badge" id="user-badge"></span>
+      <button class="btn-logout" id="logout-btn">로그아웃</button>
+    </div>
+  </header>
+
+  <!-- 툴바 -->
+  <div class="board-toolbar">
+    <button class="btn-add-col" id="add-col-btn">＋ 컬럼 추가</button>
+  </div>
+
+  <!-- 보드 -->
+  <main class="board-wrap">
+    <div class="board" id="board"></div>
+  </main>
+
+  <!-- 컬럼 모달 -->
+  <div class="modal-backdrop" id="col-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="col-modal-title">컬럼 추가</h2>
+        <button class="modal-close" onclick="closeModal('col-modal')">✕</button>
+      </div>
+      <form id="col-form">
+        <input type="hidden" id="col-modal-id" />
+        <div class="form-group">
+          <label for="col-title-input">컬럼 이름</label>
+          <input type="text" id="col-title-input" placeholder="컬럼 이름 입력" required />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('col-modal')">취소</button>
+          <button type="submit" class="btn-primary">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 카드 모달 -->
+  <div class="modal-backdrop" id="card-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="card-modal-title">카드 추가</h2>
+        <button class="modal-close" onclick="closeModal('card-modal')">✕</button>
+      </div>
+      <form id="card-form">
+        <input type="hidden" id="card-modal-id" />
+        <input type="hidden" id="card-modal-col-id" />
+        <div class="form-group">
+          <label for="card-title-input">카드 제목</label>
+          <input type="text" id="card-title-input" placeholder="카드 제목 입력" required />
+        </div>
+        <div class="form-group">
+          <label for="card-desc-input">설명 <span class="optional">(선택)</span></label>
+          <textarea id="card-desc-input" placeholder="카드 설명 입력" rows="3"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('card-modal')">취소</button>
+          <button type="submit" class="btn-primary">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/board.js"></script>
+</body>
+</html>
